@@ -8,6 +8,7 @@ _B.E. - Electronics and Communication_ (2009 - 2013)
 * Director, [TEDxManipalU](https://www.ted.com/tedx/events/6308)
 * Associate Editor, Editorial Board - Manipal University
 
+* * *
 
 ## Areas of Interest
 
@@ -78,6 +79,8 @@ _MongoDB_
 - Built a nuanced custom text segmenter for legal contract data (reqd. complex multiple nesting to get entire context of a sentence) such that it was generalizable across any legal contract type by designing a feature-based heuristic approach achieving a False Negative Rate of 0 and a system that is accurate >95% of the time
 - Built e2e gRPC services for parsing PDF documents using Adobe's Java SDK involving migration from Maven to Bazel
 - Built a Central Data Store for all legal contracts and built services around it that handled parsing of source data, segmentation using the nuanced custom text segmenter and storing of this segmented data along with their embeddings that allowed for maintaining data integrity and similar clause/sub-clause search with user defined search space.
+
+* * *
 
 ## Awards
 
