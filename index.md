@@ -60,5 +60,7 @@ People who have influenced me:
 
 You can navigate to my **resume** [here](./resume.md)
 
-## What can you expect to find here?
+## Blog Roll
+
+1. [Description Based Text Classification with Reinforcement Learning](./articles/ml/desc_based_text_classification.md)
 
