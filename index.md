@@ -58,7 +58,7 @@ People who have influenced me:
 
 * * *
 
-You can navigate to my resume [here](./resume.md)
+You can navigate to my **resume** [here](./resume.md)
 
 ## What can you expect to find here?
 
