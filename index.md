@@ -58,7 +58,7 @@ People who have influenced me:
 
 * * *
 
-You can navigate to my **resume** [here](./resume.md) `:pushpin:`
+You can navigate to my **resume** [here](./resume.md)
 
 ## Blog Roll
 

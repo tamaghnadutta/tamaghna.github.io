@@ -1,4 +1,4 @@
-## `:mortar_board:` Education
+## Education
 
 **Manipal Institute of Technology**
 
@@ -10,7 +10,7 @@ _B.E. - Electronics and Communication_ (2009 - 2013)
 
 * * *
 
-## `:atom:` Areas of Interest
+## Areas of Interest
 
 * Natural Language Generation (NLG)
 * Question Answering (QA) Systems
@@ -22,7 +22,7 @@ _B.E. - Electronics and Communication_ (2009 - 2013)
 
 * * *
 
-## `:computer:` Skills
+## Skills
 
 #### >> ML Frameworks
 _PyTorch, TensorFlow, Keras_
@@ -52,7 +52,7 @@ _MongoDB_
 
 * * *
 
-## `:briefcase:` Professional Experience
+## Professional Experience
 
 - Implemented CNNs for text classification w/ explainability using LIME (Locally Interpretable Model Agnostic Explanations) on legal contract data for multiple contract types
 - Implemented Induction Networks w/ Episodic Learning for Few-Shot Text Classification on legal contract data for multiple contract types
@@ -68,7 +68,7 @@ _MongoDB_
 
 * * *
 
-## `:trophy:` Awards
+## Awards
 
 **Best Enterprise + Industrial AI**, [_Amazon AI Conclave 2019_](https://events.yourstory.com/amazon-ai-conclave-2019)
 
