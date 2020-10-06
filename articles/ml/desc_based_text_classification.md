@@ -52,3 +52,21 @@ You concatenate the query, **q<sub>y</sub>** with the text, **x** and feed it to
 
 {**[CLS]**; q<sub>y</sub>; **[SEP]**; x} → transformers in BERT → contextual representation, **h<sub>[CLS]</sub>**
 
+You then pass it through the sigmoid layer,
+
+p(y|x) = sigmoid(**W<sub>2</sub>**ReLU(**W<sub>1</sub>**h<sub>[CLS]</sub> + **b<sub>1</sub>**) + **b<sub>2</sub>**) → value between **0** and **1**
+
+For single-label classification, you just take the argmax of the sigmoid (which is nothing but the softmax)
+
+y˜ = **arg max**<sub>y</sub>({p(y|x), **∀y ∈ Y**})
+
+For multi-label classification,
+
+y˜ = {y | p(y|x) > 0.5, **∀y ∈ Y**}
+
+You may also formulate your multi-class problem as a single N-class classifier by concatenating all descriptions with the input **x**,
+
+{**[CLS<sub>1</sub>]**; q<sub>1</sub>; **[CLS<sub>2</sub>]**; q<sub>2</sub>; ...; **[CLS<sub>N</sub>]**; q<sub>N</sub> ; **[SEP]**; x} → fed to transformer → h<sub>[CLS<sub>1</sub>]</sub>, h<sub>[CLS<sub>2</sub>]</sub>, ..., h<sub>[CLS<sub>N</sub>]</sub>
+
+
+
