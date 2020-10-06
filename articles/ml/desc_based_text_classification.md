@@ -177,3 +177,4 @@ Unlike standard **REINFORCE** training, in which the _same reward_ is used to up
 
 here, R(q<sub>\<i</sub>) denotes the reward given the partially decoded sequence q<sub>\<i</sub> as the description, and b(q<sub>\<i</sub>) denotes the baseline (average of all previous rewards).
 
+The generative policy P<sub>SEQ2SEQ</sub> is initialized using a pretrained encoder-decoder with input being **x** and output being template descriptions. Then the description generation model and the classification model are jointly trained based on the reward.
