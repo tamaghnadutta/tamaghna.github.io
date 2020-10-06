@@ -62,7 +62,7 @@ y˜ = **arg max**<sub>y</sub>({p(y\|x), **∀y ∈ Y**})
 
 For multi-label classification,
 
-y˜ = {y \| p(y|x) > 0.5, **∀y ∈ Y**}
+y˜ = {y \| p(y\|x) > 0.5, **∀y ∈ Y**}
 
 These are binary classifiers and you can have N-binary classifiers like so.
 
