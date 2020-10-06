@@ -54,15 +54,17 @@ You concatenate the query, **q<sub>y</sub>** with the text, **x** and feed it to
 
 You then pass it through the sigmoid layer,
 
-p(y|x) = sigmoid(**W<sub>2</sub>**ReLU(**W<sub>1</sub>**h<sub>[CLS]</sub> + **b<sub>1</sub>**) + **b<sub>2</sub>**) → value between **0** and **1**
+p(y\|x) = sigmoid(**W<sub>2</sub>**ReLU(**W<sub>1</sub>**h<sub>[CLS]</sub> + **b<sub>1</sub>**) + **b<sub>2</sub>**) → value between **0** and **1**
 
 For single-label classification, you just take the argmax of the sigmoid (which is nothing but the softmax)
 
-y˜ = **arg max**<sub>y</sub>({p(y|x), **∀y ∈ Y**})
+y˜ = **arg max**<sub>y</sub>({p(y\|x), **∀y ∈ Y**})
 
 For multi-label classification,
 
-y˜ = {y | p(y|x) > 0.5, **∀y ∈ Y**}
+y˜ = {y \| p(y|x) > 0.5, **∀y ∈ Y**}
+
+These are binary classifiers and you can have N-binary classifiers like so.
 
 You may also formulate your multi-class problem as a single N-class classifier by concatenating all descriptions with the input **x**,
 
