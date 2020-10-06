@@ -26,10 +26,8 @@ This strategy forces the model to attend to the most salient (important) feature
 
 Let's first have a glimpse of BERT's attention mechanism.
 
-![Attention](./assets/images/article_1/bert_attention.jpg)
+![Attention](./assets/images/article_1/bert_attention.png)
 Fig. [_Analysis of BERT’s Attention (Clark et. all)_](https://www-nlp.stanford.edu/pubs/clark2019what.pdf)
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
 
 As you can see, the self-attention mechanism pays attention to only a handful of words in each of it's layers. This means that the actual class indicators in the text can be just a few keywords and could be deeply buried in the text making it hard to differentiate grain from chaff.
 
