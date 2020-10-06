@@ -64,3 +64,10 @@ You can navigate to my **resume** [here](./resume.md)
 
 1. [Description Based Text Classification with Reinforcement Learning](./articles/ml/desc_based_text_classification.md)
 
+## Connect With Me
+
+E-mail: tamaghna.dutta@gmail.com
+LinkedIn: [Tamaghna Dutta](https://www.linkedin.com/in/tamaghna-dutta)
+Twitter: [metaaxiom](https://twitter.com/metaaxiom)
+Instagram: [metamorphosisofthought](https://www.instagram.com/metamorphosisofthought/)
+
