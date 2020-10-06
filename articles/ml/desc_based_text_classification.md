@@ -46,5 +46,9 @@ Past work on query generation:
 
 This paper takes inspiration from 1. and 4. above and marries the two.
 
-#### 
-{[CLS]; q<sub>y</sub>; [SEP]; x} → transformers in BERT → contextual representation, h<sub>[CLS]</sub>
+#### How is the description-based text classification formulated?
+
+You concatenate the query, **q<sub>y</sub>** with the text, **x** and feed it to a transformer and get the **h<sub>[CLS]</sub>** which encodes the entire query + text. (The **[CLS]** token bakes in all the features from the input text and is what is sent forward to the softmax/sigmoid layer for classification)
+
+{**[CLS]**; q<sub>y</sub>; **[SEP]**; x} → transformers in BERT → contextual representation, **h<sub>[CLS]</sub>**
+
