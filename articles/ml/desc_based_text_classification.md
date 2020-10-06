@@ -34,6 +34,8 @@ As you can see, the self-attention mechanism pays attention to only a handful of
 
 If you are dealing with a multi-label text classification problem, then signals from different classes might get entangled in the text as well. All this makes it difficult for the model as it needs to first learn to associate relevant text with target aspect and then decide the sentiment.
 
+* * *
+
 ### Let's dive right in!
 
 Past work on query generation:
