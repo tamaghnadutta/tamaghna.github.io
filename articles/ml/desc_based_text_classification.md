@@ -70,5 +70,15 @@ You may also formulate your multi-class problem as a single N-class classifier b
 
 {**[CLS<sub>1</sub>]**; q<sub>1</sub>; **[CLS<sub>2</sub>]**; q<sub>2</sub>; ...; **[CLS<sub>N</sub>]**; q<sub>N</sub> ; **[SEP]**; x} → fed to transformer → h<sub>[CLS<sub>1</sub>]</sub>, h<sub>[CLS<sub>2</sub>]</sub>, ..., h<sub>[CLS<sub>N</sub>]</sub>
 
+Do **note** though that the N-class classifier strategy cannot handle the multi-label classification case.
+
+The probability of assigning class _n_ to instance _x_ is obtained by first mapping h<sub>[CLS<sub>n</sub>]</sub> to scalars and then applying a softmax on it
+
+a<sub>n</sub> = h<sup>^</sup><sup>T</sup>.h<sub>[CLS<sub>n</sub>]</sub>
+
+p(y=n\|x) = softmax(a<sub>n</sub>)
+
+
+
 
 
