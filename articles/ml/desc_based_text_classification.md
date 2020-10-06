@@ -29,8 +29,12 @@ Let's first have a glimpse of BERT's attention mechanism.
 ![Bert's Attention](./assets/images/article_1/bert_attention.jpg)
 Fig. [_Analysis of BERT’s Attention (Clark et. all)_](https://www-nlp.stanford.edu/pubs/clark2019what.pdf)
 
+![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
+
 As you can see, the self-attention mechanism pays attention to only a handful of words in each of it's layers. This means that the actual class indicators in the text can be just a few keywords and could be deeply buried in the text making it hard to differentiate grain from chaff.
 
 You can use [ExBERT](https://exbert.net/exBERT.html?model=bert-base-cased&modelKind=bidirectional&sentence=The%20girl%20ran%20to%20a%20local%20pub%20to%20escape%20the%20din%20of%20her%20city.&corpus=woz&layer=0&heads=..0,1,2,3,4,5,6,7,8,9,10,11&threshold=0.7&tokenInd=null&tokenSide=null&maskInds=..9&metaMatch=pos&metaMax=pos&displayInspector=null&offsetIdxs=..-1,0,1&hideClsSep=true) in order to visualize this.
 
 If you are dealing with a multi-label text classification problem, then signals from different classes might get entangled in the text as well. All this makes it difficult for the model as it needs to first learn to associate relevant text with target aspect and then decide the sentiment.
+
+
