@@ -41,10 +41,12 @@ Past work on query generation:
 2. Generative model to generate queries based on unlabeled texts to train QA models
 3. Framed the task of description generation as a seq2seq task, where descriptions are generated conditioning on the texts
 4. Proposed a generator-evaluator framework that directly optimizes objectives
-    - Generator - is a seq2seq model that incorporates the structure and semantics of the question being generated
-    - Evaluator - evaluates and assigns a reward to each predicted question based on its conformity to the structure of ground-truth questions
+    - _Generator_ - is a seq2seq model that incorporates the structure and semantics of the question being generated
+    - _Evaluator_ - evaluates and assigns a reward to each predicted question based on its conformity to the structure of ground-truth questions
 
-This paper takes inspiration from 1. and 4. above and marries the two.
+This paper takes inspiration from **1.** and **4.** above and marries the two.
+
+* * *
 
 #### How is the description-based text classification formulated?
 
@@ -78,6 +80,8 @@ a<sub>n</sub> = h<sup>^</sup><sup>T</sup>.h<sub>[CLS<sub>n</sub>]</sub>
 
 p(y=n\|x) = softmax(a<sub>n</sub>)
 
+* * *
+
 #### What are the ways to construct description?
 
 There are primarily three strategies:
@@ -90,6 +94,8 @@ Important thing to note here is that the goal is to have the ability for the mod
 The Template Strategy is usually very labour intensive and also human generated templates might be sub-optimal. So let's have a deeper look at the Extractive and Abstractive strategies.
 
 If you have worked on any text summarisation problem, then you can build your intuition around the Extractive Strategy by looking at SQuAD style text extraction from the body of the text and you can build your intuition around the Abstractive Strategy by looking at GPT-2/GPT-3 style generative text generation.
+
+* * *
 
 #### Description Construction : Extractive Strategy
 
@@ -151,6 +157,8 @@ where, **b** denotes the baseline value, which is set to the average of all prev
 
 So, the Extractive Policy is initialized to generate sub-text as descriptions. Then the extractive model and the classification model are jointly trained based on the reward.
 
+* * *
+
 #### Description construction : Abstractive Strategy
 
 ##### Action and Policy
@@ -178,3 +186,5 @@ Unlike standard **REINFORCE** training, in which the _same reward_ is used to up
 here, R(q<sub>\<i</sub>) denotes the reward given the partially decoded sequence q<sub>\<i</sub> as the description, and b(q<sub>\<i</sub>) denotes the baseline (average of all previous rewards).
 
 The generative policy **P<sub>SEQ2SEQ</sub>** is initialized using a pretrained encoder-decoder with input being **x** and output being template descriptions. Then the description generation model and the classification model are jointly trained based on the reward.
+
+* * *
