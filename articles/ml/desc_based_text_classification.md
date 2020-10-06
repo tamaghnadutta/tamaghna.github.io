@@ -111,20 +111,21 @@ Reinforcement learning is used to back-propagate the signal indicating which spa
 
 ##### Action and Policy
 
-For each class label **y**, ***action*** is to pick a text-span {x<sub>i<sub>s</sub></sub> , · · · , x<sub>i<sub>e</sub></sub>} from **x** to represent **q<sub>yx</sub>** → need start and end index of span, a<sub>i<sub>s</sub>,i<sub>e</sub></sub>
+For each class label **y**, ***action*** is to pick a text-span {x<sub>i<sub>s</sub></sub> , · · · , x<sub>i<sub>e</sub></sub>} from **x** to represent **q<sub>yx</sub>** → need start and end index of span, **a<sub>i<sub>s</sub>,i<sub>e</sub></sub>**
 
 For each class label **y**, the ***policy*** **π** defines the probability of selecting the start index, i<sub>s</sub> and end index, i<sub>e</sub>.
 
 Each token x<sub>k</sub> within **x** is mapped to a representation h<sub>k</sub> using BERT.
 
-P<sub>start</sub>(y, k) = exp(W<sub>ys</sub>h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(W<sub>ys</sub>h<sub>t</sub>))
-P<sub>end</sub>(y, k) = exp(W<sub>ye</sub>h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(W<sub>ye</sub>h<sub>t</sub>))
+P<sub>start</sub>(y, k) = exp(**W<sub>ys</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ys</sub>**h<sub>t</sub>))
+
+P<sub>end</sub>(y, k) = exp(**W<sub>ye</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ye</sub>**h<sub>t</sub>))
 
 Each class **y** has a class-specific **W<sub>ys</sub>** and **W<sub>ye</sub>**
 
 Probability of a text span with the starting index i<sub>s</sub> and ending index i<sub>e</sub> being the description for class **y**, P<sub>span</sub>(y, a<sub>is,ie</sub>) is -
 
-P<sub>span</sub>(y, a<sub>is,ie</sub>) = P<sub>start</sub>(y, i<sub>s</sub>) × P<sub>end</sub>(y, i<sub>e</sub>)
+**P<sub>span</sub>(y, a<sub>is,ie</sub>) = P<sub>start</sub>(y, i<sub>s</sub>) × P<sub>end</sub>(y, i<sub>e</sub>)**
 
 ##### Reward
 
@@ -138,13 +139,13 @@ R(x, q<sub>yx</sub> for all **y**) = p(y = n\|x) where, **n** is gold label for 
 
 To find optimal policy, use **REINFORCE** algorithm which maximizes the expected reward E<sub>π</sub>[R(x, q<sub>y</sub>)]
 
-For each generated description q<sub>yx</sub> and the corresponding **x**,
+For each generated description **q<sub>yx</sub>** and the corresponding **x**,
 
-_L_ = −E<sub>π</sub>[R(q<sub>yx</sub>, x)]
+**_L_ = −E<sub>π</sub>[R(q<sub>yx</sub>, x)]**
 
 **REINFORCE** approximates above equation with sampled distributions from the policy(π) distribution and the gradient to update parameters is given by -
 
-∇_L_ ≈ -Σ<sub>i=1...B</sub>∇logπ(a<sub>i<sub>s</sub>,i<sub>e</sub></sub>\|x, y)[R(q<sub>y</sub>)-b]
+**∇_L_ ≈ -Σ<sub>i=1...B</sub>∇logπ(a<sub>i<sub>s</sub>,i<sub>e</sub></sub>\|x, y)[R(q<sub>y</sub>)-b]**
 
 where, **b** denotes the baseline value, which is set to the average of all previous rewards.
 
