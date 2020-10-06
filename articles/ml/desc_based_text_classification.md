@@ -26,7 +26,7 @@ This strategy forces the model to attend to the most salient (important) feature
 
 Let's first have a glimpse of BERT's attention mechanism.
 
-![Bert's Attention](./assets/images/article_1/bert_attention.jpg)
+![Attention](./assets/images/article_1/bert_attention.jpg)
 Fig. [_Analysis of BERT’s Attention (Clark et. all)_](https://www-nlp.stanford.edu/pubs/clark2019what.pdf)
 
 ![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
