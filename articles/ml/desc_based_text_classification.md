@@ -173,7 +173,7 @@ So, circumvention around this can't happen with the basic **REINFORCE** algorith
 
 Unlike standard **REINFORCE** training, in which the _same reward_ is used to update the probability of _all tokens_ within the description, **REGS** trains a discriminator that is able to assign rewards to partially decoded sequences.
 
-**∇_L_ ≈ -Σ<sub>i=1...L</sub>∇logπ(q<sub>_i_</sub>\|q<sub>_\<i_</sub>, h<sub>y</sub>)[R(q<sub>_\<i_</sub>) - b(q<sub>_\<i_)]**
+**∇_L_ ≈ -Σ<sub>i=1...L</sub>∇logπ(q<sub>_i_</sub>\|q<sub>_\<i_</sub>, h<sub>y</sub>)[R(q<sub>_\<i_</sub>) - b(q<sub>_\<i_</sub>)]**
 
 here, R(q<sub>\<i</sub>) denotes the reward given the partially decoded sequence q<sub>\<i</sub> as the description, and b(q<sub>\<i</sub>) denotes the baseline (average of all previous rewards).
 
