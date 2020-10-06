@@ -78,7 +78,74 @@ a<sub>n</sub> = h<sup>^</sup><sup>T</sup>.h<sub>[CLS<sub>n</sub>]</sub>
 
 p(y=n\|x) = softmax(a<sub>n</sub>)
 
+#### What are the ways to construct description?
 
+There are primarily three strategies:
+- Template strategy
+- Abstractive Strategy
+- Extractive Strategy
 
+Important thing to note here is that the goal is to have the ability for the model to generate the most _appropriate descriptions_ of the different classes _conditioned on the current text to classify_, and the appropriateness of the generated descriptions should _directly correlate_ with the _final classification performance_.
 
+The Template Strategy is usually very labour intensive and also human generated templates might be sub-optimal. So let's have a deeper look at the Extractive and Abstractive strategies.
 
+If you have worked on any text summarisation problem, then you can build your intuition around the Extractive Strategy by looking at SQuAD style text extraction from the body of the text and you can build your intuition around the Abstractive Strategy by looking at GPT-2/GPT-3 style generative text generation.
+
+#### Description Construction : Extractive Strategy
+
+For each input, x = {x<sub>1</sub>, · · · , x<sub>T</sub>} the extractive model generates a description **q<sub>yx</sub>** for each class label **y**; where **q<sub>yx</sub>** is a _substring_ of **x**. For different inputs **x**, descriptions for the same class can be different. This is quite intuitive as when **x** changes, the base text on which extractions are done changes and thus the descriptions also change.
+
+It's important to note that -
+* For the _golden class_, **y** that should be assigned to **x**, there should always be a substring of **x** relevant to **y**.
+* But for classes that should not be assigned, there might _not be_ corresponding substrings in **x** that can be used as descriptions.
+
+To deal with this problem, _append N dummy tokens_ to **x** such that if the extractive model picks a dummy token it will fall back to using hand-crafted templates for different categories as descriptions. Also, note that in this case, the hand-crafted examples are crafted by using some regex heuristics rather than completely manual.
+
+Now you must have been wondering, when does the reinforcement learning bit come in and how does it actually help?
+
+Reinforcement learning is used to back-propagate the signal indicating which span contributes how much to the classification performance. Let's also introduce some typical reinforcement learning components here -
+
+* action, **a**
+* policy, **π**
+* reward, **r**
+
+##### Action and Policy
+
+For each class label **y**, ***action*** is to pick a text-span {x<sub>i<sub>s</sub></sub> , · · · , x<sub>i<sub>e</sub></sub>} from **x** to represent **q<sub>yx</sub>** → need start and end index of span, a<sub>i<sub>s</sub>,i<sub>e</sub></sub>
+
+For each class label **y**, the ***policy*** **π** defines the probability of selecting the start index, i<sub>s</sub> and end index, i<sub>e</sub>.
+
+Each token x<sub>k</sub> within **x** is mapped to a representation h<sub>k</sub> using BERT.
+
+P<sub>start</sub>(y, k) = exp(W<sub>ys</sub>h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(W<sub>ys</sub>h<sub>t</sub>))
+P<sub>end</sub>(y, k) = exp(W<sub>ye</sub>h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(W<sub>ye</sub>h<sub>t</sub>))
+
+Each class **y** has a class-specific **W<sub>ys</sub>** and **W<sub>ye</sub>**
+
+Probability of a text span with the starting index i<sub>s</sub> and ending index i<sub>e</sub> being the description for class **y**, P<sub>span</sub>(y, a<sub>is,ie</sub>) is -
+
+P<sub>span</sub>(y, a<sub>is,ie</sub>) = P<sub>start</sub>(y, i<sub>s</sub>) × P<sub>end</sub>(y, i<sub>e</sub>)
+
+##### Reward
+
+Given **x** and the description **q<sub>yx</sub>**, classification model will assign probability of assigning correct label to **x** which will be used as ***reward*** to update both the classification model and the extractive model.
+
+For multi-class classification, ***reward*** is given by -
+
+R(x, q<sub>yx</sub> for all **y**) = p(y = n\|x) where, **n** is gold label for **x**
+
+#### REINFORCE
+
+To find optimal policy, use **REINFORCE** algorithm which maximizes the expected reward E<sub>π</sub>[R(x, q<sub>y</sub>)]
+
+For each generated description q<sub>yx</sub> and the corresponding **x**,
+
+_L_ = −E<sub>π</sub>[R(q<sub>yx</sub>, x)]
+
+**REINFORCE** approximates above equation with sampled distributions from the policy(π) distribution and the gradient to update parameters is given by -
+
+∇_L_ ≈ -Σ<sub>i=1...B</sub>∇logπ(a<sub>i<sub>s</sub>,i<sub>e</sub></sub>\|x, y)[R(q<sub>y</sub>)-b]
+
+where, **b** denotes the baseline value, which is set to the average of all previous rewards.
+
+So, the Extractive Policy is initialized to generate sub-text as descriptions. Then the extractive model and the classification model are jointly trained based on the reward.
