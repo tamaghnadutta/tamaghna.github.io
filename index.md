@@ -66,8 +66,11 @@ You can navigate to my **resume** [here](./resume.md)
 
 ## Connect With Me
 
-E-mail: tamaghna.dutta@gmail.com
+E-mail: <tamaghna.dutta@gmail.com>
+
 LinkedIn: [Tamaghna Dutta](https://www.linkedin.com/in/tamaghna-dutta)
+
 Twitter: [metaaxiom](https://twitter.com/metaaxiom)
+
 Instagram: [metamorphosisofthought](https://www.instagram.com/metamorphosisofthought/)
 
