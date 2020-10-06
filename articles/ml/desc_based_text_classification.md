@@ -169,7 +169,7 @@ where q<sub>\<i</sub> denotes all the already generated tokens
 
 When dealing with abstractive summarisation, since we are dealing with the paradigm of generating text, we know that the possible generated tokens might be a really big space, let's call it **action space**. Now, a widely recognized challenge for training language models using RL → _high variance_ due to **action space** being _huge_.
 
-So, circumvention around this can't happen with the basic **REINFORCE** algorithm. To deal with this, we will use **REGS**(**R**eward for **E**very **G**eneration **S**tep)
+So, circumvention around this can't happen with the basic **REINFORCE** algorithm. To deal with this, we will use **REGS**(**R**eward for **E**very **G**eneration **S**tep) - also called Monte Carlo Tree Search ([further reading](https://towardsdatascience.com/monte-carlo-tree-search-158a917a8baa))
 
 Unlike standard **REINFORCE** training, in which the _same reward_ is used to update the probability of _all tokens_ within the description, **REGS** trains a discriminator that is able to assign rewards to partially decoded sequences.
 
@@ -177,4 +177,4 @@ Unlike standard **REINFORCE** training, in which the _same reward_ is used to up
 
 here, R(q<sub>\<i</sub>) denotes the reward given the partially decoded sequence q<sub>\<i</sub> as the description, and b(q<sub>\<i</sub>) denotes the baseline (average of all previous rewards).
 
-The generative policy P<sub>SEQ2SEQ</sub> is initialized using a pretrained encoder-decoder with input being **x** and output being template descriptions. Then the description generation model and the classification model are jointly trained based on the reward.
+The generative policy **P<sub>SEQ2SEQ</sub>** is initialized using a pretrained encoder-decoder with input being **x** and output being template descriptions. Then the description generation model and the classification model are jointly trained based on the reward.
