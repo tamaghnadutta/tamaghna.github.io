@@ -117,9 +117,9 @@ For each class label **y**, the ***policy*** **π** defines the probability of s
 
 Each token x<sub>k</sub> within **x** is mapped to a representation h<sub>k</sub> using BERT.
 
-P<sub>start</sub>(y, k) = exp(**W<sub>ys</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ys</sub>**h<sub>t</sub>))
+**P<sub>start</sub>(y, k)** = exp(**W<sub>ys</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ys</sub>**h<sub>t</sub>))
 
-P<sub>end</sub>(y, k) = exp(**W<sub>ye</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ye</sub>**h<sub>t</sub>))
+**P<sub>end</sub>(y, k)** = exp(**W<sub>ye</sub>**h<sub>k</sub>)/(Σ<sub>1...T</sub> exp(**W<sub>ye</sub>**h<sub>t</sub>))
 
 Each class **y** has a class-specific **W<sub>ys</sub>** and **W<sub>ye</sub>**
 
@@ -135,9 +135,9 @@ For multi-class classification, ***reward*** is given by -
 
 R(x, q<sub>yx</sub> for all **y**) = p(y = n\|x) where, **n** is gold label for **x**
 
-#### REINFORCE
+##### REINFORCE
 
-To find optimal policy, use **REINFORCE** algorithm which maximizes the expected reward E<sub>π</sub>[R(x, q<sub>y</sub>)]
+To find optimal policy, use **REINFORCE** algorithm which maximizes the expected reward **E<sub>π</sub>[R(x, q<sub>y</sub>)]**
 
 For each generated description **q<sub>yx</sub>** and the corresponding **x**,
 
@@ -150,3 +150,30 @@ For each generated description **q<sub>yx</sub>** and the corresponding **x**,
 where, **b** denotes the baseline value, which is set to the average of all previous rewards.
 
 So, the Extractive Policy is initialized to generate sub-text as descriptions. Then the extractive model and the classification model are jointly trained based on the reward.
+
+#### Description construction : Abstractive Strategy
+
+##### Action and Policy
+
+For each class label **y**, the ***action*** is to generate the description q<sub>yx</sub> = {q<sub>1</sub>, · · · , q<sub>L</sub>} defined by p<sub>θ</sub>
+
+And the policy, P<sub>SEQ2SEQ</sub> is given by -
+
+**P<sub>SEQ2SEQ</sub>(q<sub>y</sub>\|x)** = Π<sub>i=1..L</sub>p<sub>θ</sub>(q<sub>_i_</sub>\|q<sub>_\<i_</sub>, x, y)
+
+where q<sub>\<i</sub> denotes all the already generated tokens
+
+**P<sub>SEQ2SEQ</sub>(q<sub>y</sub>\|x)** for different class y share the structures and parameters, with the only difference being that a class specific embedding hy is appended to each source and target token.
+
+##### Reward
+
+When dealing with abstractive summarisation, since we are dealing with the paradigm of generating text, we know that the possible generated tokens might be a really big space, let's call it **action space**. Now, a widely recognized challenge for training language models using RL → _high variance_ due to **action space** being _huge_.
+
+So, circumvention around this can't happen with the basic **REINFORCE** algorithm. To deal with this, we will use **REGS**(**R**eward for **E**very **G**eneration **S**tep)
+
+Unlike standard **REINFORCE** training, in which the _same reward_ is used to update the probability of _all tokens_ within the description, **REGS** trains a discriminator that is able to assign rewards to partially decoded sequences.
+
+**∇_L_ ≈ -Σ<sub>i=1...L</sub>∇logπ(q<sub>_i_</sub>\|q<sub>_\<i_</sub>, h<sub>y</sub>)[R(q<sub>_\<i_</sub>) - b(q<sub>_\<i_)]**
+
+here, R(q<sub>\<i</sub>) denotes the reward given the partially decoded sequence q<sub>\<i</sub> as the description, and b(q<sub>\<i</sub>) denotes the baseline (average of all previous rewards).
+
