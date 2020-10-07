@@ -88,8 +88,4 @@ You're not usually going to launch pods. Let's move on and see what a Replica Se
 
 * Defines the desired scale and state of a group of pods (e.g. If you tell it that you want three replicas, which means three copies of a pod, and if there's none - Kubernetes is gonna do it's best to make three of them appear)
 
-![](/assets/images/replica.png)
-
-![](/assets/images/replicadead.png)
-
-![](/assets/images/desiredstate.png)
+![](/assets/images/replicaset.png)
